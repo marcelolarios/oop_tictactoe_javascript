@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe Game</title>
+  <style>
+	*, input {
+		font-family:Courier;
+		font-size:16px;
+	}
+    input[type=text] {
+		width:20px; 
+	}
+	*:focus {
+		outline: none;
+	}
+  </style>
+</head>
+<body>
+  <p>*** Jogo da velha ***</p>
+  <p id="gameStatus" readonly></p>
+  <p>digite o nr: 
+	  <input id="moveInput" type="text" maxlength="1" autofocus>
+	  <button id="myBtn" onclick="makeMove()">Envia</button>
+  </p>
+  <br><br>
+
+<script src="storage.js"></script>
+<script src="tabuleiro.js"></script> 
+<script src="jogador.js"></script>
+<script src="humano.js"></script>
+<script src="computador.js"></script>
+<script>
+
+const tb = new Tabuleiro();
+tb.partida(0);
+tb.mostra();
+
+var input = document.getElementById("moveInput");
+
+input.addEventListener("keypress", function(event) {
+
+  if (event.key === "Enter") {
+  
+    document.getElementById("myBtn").click();
+  }
+}); 
+
+function makeMove() {
+
+	tb.partida(input.value);
+	input.value='';
+	tb.mostra();
+	if(tb.sto.getResultado() > 0) tb.sto.zera();
+	input.focus();
+}
+
+</script>
+</body>
+</html>
